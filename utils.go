@@ -62,7 +62,7 @@ func response(w http.ResponseWriter, coin string) {
 	w.Header().Set("Content-Type", "application/json")
 
 	resp := make(map[string]string)
-	resp["price"] = res
+	resp[coin] = res
 	jsonResp, err := json.Marshal(resp)
 	if err != nil {
 		log.Fatal(err)
