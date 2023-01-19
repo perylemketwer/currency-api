@@ -8,9 +8,9 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.GET("/:name", func(ctx *gin.Context) {
-		name := ctx.Param("name")
-		switch name {
+	router.GET("/:coin", func(ctx *gin.Context) {
+		coin := ctx.Param("coin")
+		switch coin {
 		case "bitcoin":
 			response(ctx.Writer, "BTC")
 		case "canadiandollar":
@@ -24,7 +24,7 @@ func main() {
 		case "pound":
 			response(ctx.Writer, "GBP")
 		default:
-			response(ctx.Writer, name)
+			response(ctx.Writer, coin)
 		}
 	})
 
