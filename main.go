@@ -2,33 +2,32 @@ package main
 
 import (
 	"log"
-	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/{name}", func(w http.ResponseWriter, r *http.Request) {
-		name := mux.Vars(r)["name"]
+	router := gin.Default()
+	router.GET("/:name", func(ctx *gin.Context) {
+		name := ctx.Param("name")
 		switch name {
 		case "bitcoin":
-			response(w, "BTC")
+			response(ctx.Writer, "BTC")
 		case "canadiandollar":
-			response(w, "CAD")
+			response(ctx.Writer, "CAD")
 		case "dogecoin":
-			response(w, "DOGE")
+			response(ctx.Writer, "DOGE")
 		case "dollar":
-			response(w, "USD")
+			response(ctx.Writer, "USD")
 		case "euro":
-			response(w, "EUR")
+			response(ctx.Writer, "EUR")
 		case "pound":
-			response(w, "GBP")
+			response(ctx.Writer, "GBP")
 		default:
-			response(w, name)
+			response(ctx.Writer, name)
 		}
 	})
 
 	log.Print("The is Server Running on localhost port 8080")
-	log.Fatal(http.ListenAndServe(":8080", router))
+	router.Run(":8080")
 }

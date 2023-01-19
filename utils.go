@@ -18,9 +18,6 @@ func getCoinPrice(url string, coin string) (string, error) {
 		log.Fatal(err)
 	}
 
-	// Logging status code
-	log.Printf("Status Code: %d %s", resp.StatusCode, http.StatusText(resp.StatusCode))
-
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
